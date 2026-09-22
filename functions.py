@@ -63,11 +63,15 @@ def geraMensagemGenero(genero):
 
 # Função que pede para o usuário e verifica se a nota é válida.
 def pedeEVerificaNotaValida():
-    nota = int(input("AVALIE SEU FILME DE 0 À 10: "))
-    while nota < 0 or nota > 10:
-        print("Cara, Para de querer ferrar o Programador")
-        nota = int(input("AVALIE SEU FILME DE 0 À 10: "))
-    return nota
+    while True:
+        try:
+            nota = int(input("AVALIE SEU FILME DE 0 À 10: "))
+            while nota < 0 or nota > 10:
+                print("Cara, Para de querer ferrar o Programador")
+                nota = int(input("AVALIE SEU FILME DE 0 À 10: "))
+            return nota
+        except ValueError, TypeError:
+            print("Só aceitamos números!")
 
 # Função que cadastro todas as informações de um filme.
 def cadastrarFilme(catalogo):
@@ -78,7 +82,14 @@ def cadastrarFilme(catalogo):
     
     titulo = input("DIGITE O NOME DO FILME: ").strip().title()
     genero = input("DIGITE O GÊNERO DO FILME: ").strip().capitalize()
-    ano_lancamento = int(input("DIGITE O ANO DE LANÇAMENTO DO FILME: "))
+
+    while True:
+        try:
+            ano_lancamento = int(input("DIGITE O ANO DE LANÇAMENTO DO FILME: "))
+            break
+        except ValueError, TypeError:
+            print("Só aceitamos números!")
+
     sinopse = input("DIGITE A SINOPSE DO FILME: ").strip().capitalize()
     nota = pedeEVerificaNotaValida()
     codigo = geradorCodigo(titulo)
