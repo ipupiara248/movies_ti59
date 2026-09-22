@@ -25,6 +25,10 @@ while True:
                     print("Nenhuma nota cadastrada até o momento.")
                     f.enterParaContinuar
             case 4:
+                code = input("Digite o código do filme: ").strip().upper()
+                filme = f.buscarFilmePorCodigo(catalogo, code)
+                f.exibirFichaFilme(filme)
+            case 5:
                 print("SAINDO...")
                 break
             case _:

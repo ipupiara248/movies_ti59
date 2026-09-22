@@ -119,10 +119,11 @@ def exibirMenu():
             
 Escolha uma opção para continuar:
     
-    1-Cadastrar filme
-    2-Exibir filme 
-    3-Estatísticas do Catálogo
-    4-Sair
+    1- Cadastrar filme
+    2- Exibir catálogo
+    3- Estatísticas do Catálogo
+    4- Buscar um filme
+    5- Sair
     """)
     print("="*40)
 
@@ -184,3 +185,26 @@ def carregarCatalogo():
 def salvarCatalogo(catalogo):
     with open("catalogo.json", "w", encoding="utf-8") as arquivo:
         json.dump(catalogo, arquivo, ensure_ascii=False, indent=4)
+
+# Função que busca u filme pelo código.
+def buscarFilmePorCodigo(catalogo, codigo):
+    for i in range(len(catalogo)):
+        if catalogo[i]["codigo"] == codigo:
+            return catalogo[i]
+
+def exibirFichaFilme(filme):
+    limparTela()
+    print("[gray]=[/gray]"*30)
+    print(f"""[bold green]INFORMAÇÕES DO SEU FILME:[/bold green]""")
+
+    print(f"""
+[bold red]{filme["codigo"]}[/bold red]
+
+TÍTULO: {filme["titulo"]}
+GÊNERO: {filme["mensagem_genero"]}
+NOTA DO FILME: {filme["nota"]}/10
+AVALIAÇÃO: {filme["mensagem"]}
+ANO DE LANÇAMENTO: {filme["ano_lancamento"]}
+SINOPSE: {filme["sinopse"]}""")
+    print("[gray]=[/gray]"*30)
+    enterParaContinuar()
