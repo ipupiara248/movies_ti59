@@ -3,6 +3,7 @@ from rich import print
 import os
 import time
 import emoji
+import json
 
 # Função que limpa a tela do terminal.
 def limparTela():
@@ -107,6 +108,7 @@ def cadastrarFilme(catalogo):
                   "mensagem_genero": mensagem_genero}
     
     catalogo.append(novo_filme)
+    salvarCatalogo(catalogo)
     enterParaContinuar()
 
 # Função que exibe o menu de opções para o usuário.
@@ -170,3 +172,15 @@ def buscaFilmeMaiorNota(catalogo, maxima, minima, media):
     print(f"\nMÉDIA DAS NOTAS --> {media}")
     enterParaContinuar()
 
+# Função que carrega o arquivo .json do catalogo.
+def carregarCatalogo():
+    try:
+        with open("catalogo.json", "r", encoding="utf-8") as arquivo:
+            return json.load(arquivo)
+    except FileNotFoundError:
+        return []
+
+# Função que salva o catalogo no arquivo .json.
+def salvarCatalogo(catalogo):
+    with open("catalogo.json", "w", encoding="utf-8") as arquivo:
+        json.dump(catalogo, arquivo, ensure_ascii=False, indent=4)
